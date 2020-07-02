@@ -17,13 +17,6 @@
 - name: Store admin.conf-file locally into files/kubeadm_admin.conf
   fetch: 
     src: "/etc/kubernetes/admin.conf"
-    dest: "{{ role_path }}/files/kubeadm_admin.conf"
-    flat: yes
-  become: yes
-
-- name: Store admin.conf-file locally into files/kubeadm_admin.conf
-  fetch: 
-    src: "/etc/kubernetes/admin.conf"
     dest: "{{ inventory_dir }}/dynamic_vars/files/config/kubernetes/kubeadm_admin.conf"
     flat: yes
   become: yes

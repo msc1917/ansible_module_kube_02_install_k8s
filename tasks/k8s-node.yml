@@ -59,9 +59,6 @@
     - k8s_node is defined
     - k8s_node == "install_master"
 
-# - debug:
-#     msg: "kubeadm join --token {{ kubeadm_token }} --discovery-token-ca-cert-hash sha256:{{ kubeadm_sha_hash }} {{ master_serveNet_ip }}:6443"
-
 - name: Join to Kubernetes cluster
   shell: 
     cmd: "kubeadm join --token {{ kubeadm_token }} --discovery-token-ca-cert-hash sha256:{{ kubeadm_sha_hash }} {{ master_serveNet_ip }}:6443"

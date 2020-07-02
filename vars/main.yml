@@ -1,0 +1,10 @@
+kubeadm:  { version: 'v1.0.4',
+            os_user: { 
+              comment: "Kubernetes User",
+              user: "kube",
+              uid: 1195,
+              group: "kube",
+              gid: 1195,
+              groups: [ "docker", "sudo-nopwd" ]
+              } 
+            }

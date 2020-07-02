@@ -1,0 +1,32 @@
+---
+- name: Create kubernetes-user
+  include_tasks: engine_kubeadm/kubeadm-create_user.yml
+  when: 
+    - k8s_node is defined
+    - serveNet_ip is defined
+    - k8s_node in [ "install_master", "become_master", "node" ]
+    - kubernetes_engine == "kubeadm"
+
+- name: Setup kubeadm-master
+  include_tasks: engine_kubeadm/kubeadm-master.yml
+  when: 
+    - k8s_node is defined
+    - serveNet_ip is defined
+    - k8s_node == "install_master"
+    - kubernetes_engine == "kubeadm"
+
+- name: Setup kubeadm-node
+  include_tasks: engine_kubeadm/kubeadm-node.yml
+  when: 
+    - k8s_node is defined
+    - serveNet_ip is defined
+    - k8s_node in [ "install_master", "become_master", "node" ]
+    - kubernetes_engine == "kubeadm"
+
+- name: Setup kubernetes-user
+  include_tasks: engine_kubeadm/kubeadm-user_setup.yml
+  when: 
+    - k8s_node is defined
+    - serveNet_ip is defined
+    - k8s_node in [ "install_master", "become_master", "node" ]
+    - kubernetes_engine == "kubeadm"

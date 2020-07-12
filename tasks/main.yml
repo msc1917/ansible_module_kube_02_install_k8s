@@ -14,16 +14,19 @@
     - kube_02_install_minikube
     - kube_02_install_rke
   tags: [ nocleanup ]
+
+- name: Cleanup other kubernetes-engine-users
+  include_role:
+    name: "{{ item }}"
+    apply:
+      tags:
+        - cleanup
+  with_items:
+    - user_k3s
+    - user_minikube
+    - user_rke
+  tags: [ nocleanup ]
     
-
-- name: Create kubernetes-user
-  include_tasks: k8s-create_user.yml
-  when: 
-    - k8s_node is defined
-    - serveNet_ip is defined
-    - k8s_node in [ "install_master", "become_master", "node" ]
-    - kubernetes_engine == "kubeadm"
-
 - name: Setup kubeadm-master
   include_tasks: k8s-master.yml
   when: 
